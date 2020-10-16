@@ -75,6 +75,15 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
         });
 		return list;
 	}
+
+	public Collection<Task> getUnimportantTasks() {
+		Collection<Task> list = new ArrayList<Task>();
+		tasks.forEach((k, v) -> {
+			if(!v.isImportant())
+				list.add(v);
+        });
+		return list;
+	}
 	
 	public Collection<Task> sortByCompletion() {
 		List<Task> completelist = new ArrayList<>(getCompletedTasks());
@@ -84,6 +93,17 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
 		Collection<Task> list = new ArrayList<Task>();
 		list.addAll(completelist);
 		list.addAll(incompletelist);
+		return list;
+	}
+
+	public Collection<Task> sortByImportance() {
+		List<Task> importantList = new ArrayList<>(getImportantTasks());
+		Collections.sort(importantList);
+		List<Task> unimportantList = new ArrayList<>(getUnimportantTasks());
+		Collections.sort(unimportantList);
+		Collection<Task> list = new ArrayList<Task>();
+		list.addAll(importantList);
+		list.addAll(unimportantList);
 		return list;
 	}
 }
