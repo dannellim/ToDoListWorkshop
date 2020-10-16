@@ -47,6 +47,13 @@ public class Task implements Comparator<Task>, Comparable<Task> {
 		
 	}
 
+	public Date getCreatedDateTime() {
+		return createdDateTime;
+	}
+
+	public void setCreatedDateTime(Date createdDateTime) {
+		this.createdDateTime = createdDateTime;
+	}
 
 	public int getColorCode() {
 		return colorCode;
@@ -95,7 +102,7 @@ public class Task implements Comparator<Task>, Comparable<Task> {
 	}
 	
 	public int compareTo(Task t) {
-		return (this.createdDateTime).compareTo(t.createdDateTime);
+		return (t.createdDateTime).compareTo(this.createdDateTime);
 	}
 
 	@Override

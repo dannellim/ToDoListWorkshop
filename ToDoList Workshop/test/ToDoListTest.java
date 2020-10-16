@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -230,23 +231,45 @@ public class ToDoListTest extends TestCase{
 	@Test
 	public void testSortByCompletion() {
 		TO_DO_LIST = new ToDoList();
+		Calendar calendar = Calendar.getInstance();
 		Task completedTask1 = new Task("Task1", true);
+		completedTask1.setCreatedDateTime(calendar.getTime());
+	
 		Task incompletedTask2 = new Task("Task2", false);
+		calendar.add(Calendar.DAY_OF_MONTH, 1);
+		incompletedTask2.setCreatedDateTime(calendar.getTime());
+		
 		Task completedTask3 = new Task("Task3", true);
+		calendar.add(Calendar.DAY_OF_MONTH, 1);
+		completedTask3.setCreatedDateTime(calendar.getTime());
+		
 		Task incompletedTask4 = new Task("Task4", false);
+		calendar.add(Calendar.DAY_OF_MONTH, 1);
+		incompletedTask4.setCreatedDateTime(calendar.getTime());
+		
 		Task incompletedTask5 = new Task("Task5", false);
+		calendar.add(Calendar.DAY_OF_MONTH, 1);
+		incompletedTask5.setCreatedDateTime(calendar.getTime());
+		
 		TO_DO_LIST.addTask(completedTask1);
 		TO_DO_LIST.addTask(incompletedTask2);
 		TO_DO_LIST.addTask(completedTask3);
 		TO_DO_LIST.addTask(incompletedTask4);
 		TO_DO_LIST.addTask(incompletedTask5);
+		
 		Collection<Task> tdl =  TO_DO_LIST.sortByCompletion();
 		List<Task> sortedList = (List<Task>) tdl;
-		assertEquals(incompletedTask2.getDescription(), sortedList.get(0).getDescription());
+		
+//		Iterator<Task> in = tdl.iterator();
+//		while(in.hasNext()) {
+//			System.out.println(in.next().toString());
+//		}
+		
+		assertEquals(incompletedTask2.getDescription(), sortedList.get(2).getDescription());
 		assertEquals(incompletedTask4.getDescription(), sortedList.get(1).getDescription());
-		assertEquals(incompletedTask5.getDescription(), sortedList.get(2).getDescription());
-		assertEquals(completedTask1.getDescription(), sortedList.get(3).getDescription());
-		assertEquals(completedTask3.getDescription(), sortedList.get(4).getDescription());
+		assertEquals(incompletedTask5.getDescription(), sortedList.get(0).getDescription());
+		assertEquals(completedTask1.getDescription(), sortedList.get(4).getDescription());
+		assertEquals(completedTask3.getDescription(), sortedList.get(3).getDescription());
 	}
 	@Test
 	public void testSortByImportance() {
