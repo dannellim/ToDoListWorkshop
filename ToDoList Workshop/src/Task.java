@@ -69,10 +69,10 @@ public class Task implements Comparator<Task>, Comparable<Task> {
 
 	@Override
 	public String toString() {
-		return "Task [description=" + description + ", colorCode=" + colorCode + "]";
+		return "Task [description=" + description + ", isComplete=" + isComplete + ", isImportant=" + isImportant
+				+ ", colorCode=" + colorCode + ", createdDateTime=" + createdDateTime + "]";
 	}
 	
-		
 	public int compareTo(Task t) {
 		return (this.createdDateTime).compareTo(t.createdDateTime);
 	}

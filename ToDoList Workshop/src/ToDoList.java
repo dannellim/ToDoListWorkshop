@@ -111,8 +111,8 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
 		List<Task> incompletelist = new ArrayList<>(getUncompletedTasks());
 		Collections.sort(incompletelist);
 		Collection<Task> list = new ArrayList<Task>();
-		list.addAll(completelist);
 		list.addAll(incompletelist);
+		list.addAll(completelist);
 		return list;
 	}
 

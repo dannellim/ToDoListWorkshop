@@ -1,4 +1,5 @@
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -205,6 +206,30 @@ public class ToDoListTest extends TestCase{
 		assertTrue(completedTasks2.contains(completedImportantTask1));
 		assertTrue(completedTasks2.contains(incompletedImportantTask2));
 		assertTrue(completedTasks2.contains(Task3));
+	}
+	@Test
+	public void testSortByCompletion() {
+		TO_DO_LIST = new ToDoList();
+		Task completedTask1 = new Task("Task1", true);
+		Task incompletedTask2 = new Task("Task2", false);
+		Task completedTask3 = new Task("Task3", true);
+		Task incompletedTask4 = new Task("Task4", false);
+		Task incompletedTask5 = new Task("Task5", false);
+		TO_DO_LIST.addTask(completedTask1);
+		TO_DO_LIST.addTask(incompletedTask2);
+		TO_DO_LIST.addTask(completedTask3);
+		TO_DO_LIST.addTask(incompletedTask4);
+		TO_DO_LIST.addTask(incompletedTask5);
+		Collection<Task> td =  TO_DO_LIST.getAllTasks();
+		Iterator<Task> it = td.iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next().toString());
+		}
+		Collection<Task> tdl =  TO_DO_LIST.sortByCompletion();
+		Iterator<Task> it2 = tdl.iterator();
+		while(it2.hasNext()) {
+			System.out.println(((Task)it.next()).toString());
+		}
 	}
 	
 }
