@@ -58,4 +58,11 @@ public class Task {
 		this.isImportant = isImportant;
 	}
 
+	@Override
+	public String toString() {
+		return "Task [description=" + description + ", colorCode=" + colorCode + "]";
+	}
+	
+		
+
 }

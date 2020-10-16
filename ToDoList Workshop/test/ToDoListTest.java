@@ -1,4 +1,6 @@
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.*;
 import org.junit.Test;
@@ -91,6 +93,90 @@ public class ToDoListTest extends TestCase{
 		//fail("Not implemented yet");
 	}
 	@Test
+	public void testSortByColor() {
+		
+		TO_DO_LIST = new ToDoList();
+		Task redTask = new Task("Red Task");
+		redTask.setColorCode(0);
+		Task greenTask = new Task("Green Task");
+		greenTask.setColorCode(1);
+		Task blueTask = new Task("Blue Task");
+		blueTask.setColorCode(2);
+		
+		TO_DO_LIST.addTask(blueTask);
+		TO_DO_LIST.addTask(redTask);
+		TO_DO_LIST.addTask(greenTask);
+		List<Task> sortByColorTasks = (List<Task>) TO_DO_LIST.getSortByColor();
+		assertEquals(redTask.getDescription(),sortByColorTasks.get(0).getDescription());
+		assertEquals(greenTask.getDescription(),sortByColorTasks.get(1).getDescription());
+		assertEquals(blueTask.getDescription(),sortByColorTasks.get(2).getDescription());
+
+		//fail("Not implemented yet");
+	}
+	
+	@Test
+	public void testGroupByColor() {
+		
+		TO_DO_LIST = new ToDoList();
+		Task redTask1 = new Task("Red Task1");
+		redTask1.setColorCode(0);
+
+		Task redTask2 = new Task("Red Task2");
+		redTask2.setColorCode(0);
+		
+		Task greenTask1 = new Task("Green Task1");
+		greenTask1.setColorCode(1);
+		Task greenTask2 = new Task("Green Task2");
+		greenTask2.setColorCode(1);
+		
+		Task blueTask1 = new Task("Blue Task1");
+		blueTask1.setColorCode(2);
+		
+		Task blueTask2 = new Task("Blue Task2");
+		blueTask2.setColorCode(2);
+		
+		
+		
+		TO_DO_LIST.addTask(blueTask1);
+		TO_DO_LIST.addTask(blueTask2);
+
+		TO_DO_LIST.addTask(redTask2);
+		TO_DO_LIST.addTask(redTask1);
+		TO_DO_LIST.addTask(greenTask1);
+		TO_DO_LIST.addTask(greenTask2);
+
+		Map<Integer, List<Task>> groupByColorTasks =  TO_DO_LIST.getGroupByColor();;
+        
+        
+        //check group by color red
+        assertTrue(groupByColorTasks.get(0).contains(redTask1));
+        assertTrue(groupByColorTasks.get(0).contains(redTask2));
+        assertFalse(groupByColorTasks.get(0).contains(greenTask1));
+        assertFalse(groupByColorTasks.get(0).contains(greenTask2));
+        assertFalse(groupByColorTasks.get(0).contains(blueTask1));
+        assertFalse(groupByColorTasks.get(0).contains(blueTask2));
+
+      //check group by color green
+        assertTrue(groupByColorTasks.get(1).contains(greenTask1));
+        assertTrue(groupByColorTasks.get(1).contains(greenTask2));
+
+        assertFalse(groupByColorTasks.get(1).contains(redTask1));
+        assertFalse(groupByColorTasks.get(1).contains(redTask2));
+        assertFalse(groupByColorTasks.get(1).contains(blueTask1));
+        assertFalse(groupByColorTasks.get(1).contains(blueTask2));
+        
+      //check group by color blue
+        assertTrue(groupByColorTasks.get(2).contains(blueTask1));
+        assertTrue(groupByColorTasks.get(2).contains(blueTask2));
+
+        assertFalse(groupByColorTasks.get(2).contains(redTask1));
+        assertFalse(groupByColorTasks.get(2).contains(redTask2));
+        assertFalse(groupByColorTasks.get(2).contains(greenTask1));
+        assertFalse(groupByColorTasks.get(2).contains(greenTask2));
+        
+		//fail("Not implemented yet");
+	}
+	@Test
 	public void testGetImportantTasks() {
 		//create list
 		//create 1 completed and important task
@@ -120,4 +206,5 @@ public class ToDoListTest extends TestCase{
 		assertTrue(completedTasks2.contains(incompletedImportantTask2));
 		assertTrue(completedTasks2.contains(Task3));
 	}
+	
 }

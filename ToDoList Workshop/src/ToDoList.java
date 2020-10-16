@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ToDoList {
 private HashMap<String, Task> tasks = new HashMap<String, Task>();
@@ -63,5 +67,23 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
 				list.add(v);
         });
 		return list;
+	}
+	public Collection<Task> getSortByColor() {
+		
+		List<Task> temp = tasks.values().stream()
+				.collect(Collectors.toList());
+		Collections.sort(temp, (task1, task2) -> {
+			return task1.getColorCode() -task2.getColorCode();
+		});
+		return temp;
+	}
+	
+	public Map<Integer, List<Task>> getGroupByColor() {
+		List<Task> tempTasks = tasks.values().stream()
+				.collect(Collectors.toList());
+		 Map<Integer, List<Task>> groupByColorTasks =
+					tempTasks.stream().collect(Collectors.groupingBy(Task::getColorCode));
+
+		 return groupByColorTasks;
 	}
 }
