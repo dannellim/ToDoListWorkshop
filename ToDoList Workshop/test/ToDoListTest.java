@@ -90,4 +90,34 @@ public class ToDoListTest extends TestCase{
 		assertTrue(completedTasks.contains(completedTask2));
 		//fail("Not implemented yet");
 	}
+	@Test
+	public void testGetImportantTasks() {
+		//create list
+		//create 1 completed and important task
+		//create 1 incompleted and important task
+		//create 1 completed and unimportant task
+		//create 1 incompleted and unimportant task
+		TO_DO_LIST = new ToDoList();
+		Task completedImportantTask1 = new Task("Task1", true, true);
+		Task incompletedImportantTask2 = new Task("Task2", false, true);
+		Task completedUnimportantTask3 = new Task("Task3", true, false);
+		Task incompletedUnimportantTask4 = new Task("Task4", false, false);
+		TO_DO_LIST.addTask(completedImportantTask1);
+		TO_DO_LIST.addTask(incompletedImportantTask2);
+		TO_DO_LIST.addTask(completedUnimportantTask3);
+		TO_DO_LIST.addTask(incompletedUnimportantTask4);
+		Collection<Task> completedTasks = TO_DO_LIST.getImportantTasks();
+		int count1 = completedTasks.size();
+		assertEquals(count1, 2);
+		assertTrue(completedTasks.contains(completedImportantTask1));
+		assertTrue(completedTasks.contains(incompletedImportantTask2));
+		Task Task3 = TO_DO_LIST.getTask("Task3");
+		Task3.setImportant(true);
+		Collection<Task> completedTasks2 = TO_DO_LIST.getImportantTasks();
+		int count2 = completedTasks2.size();
+		assertEquals(count2, 3);
+		assertTrue(completedTasks2.contains(completedImportantTask1));
+		assertTrue(completedTasks2.contains(incompletedImportantTask2));
+		assertTrue(completedTasks2.contains(Task3));
+	}
 }

@@ -10,13 +10,27 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
 	public ToDoList() {
 	}
 
+	//Add item to task list
 	public void addTask (Task task) {
 		tasks.put(task.getDescription(),task);
 		//Add code here
 	}
+
+	//remove item from task list
+	public Task removeTask(String description) {
+		// Add code here
+		return tasks.remove(description);
+	}
+
 	public void completeTask(String description) {
 		// Add code here
 	}
+
+	//set important task
+	public void importantTask(String description) {
+		// Add code here
+	}
+
 	public boolean getStatus(String description) {
 		Task task = tasks.get(description);
 		return task.isComplete();
@@ -28,10 +42,6 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
 		// Add code here
 		//return null;
 	}
-	public Task removeTask(String description) {
-		// Add code here
-		return tasks.remove(description);
-	}
 	public Collection<Task> getAllTasks() {
 		return tasks.values();
 
@@ -41,6 +51,15 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
 		Collection<Task> list = new ArrayList<Task>();
 		tasks.forEach((k, v) -> {
 			if(v.isComplete())
+				list.add(v);
+        });
+		return list;
+	}
+
+	public Collection<Task> getImportantTasks() {
+		Collection<Task> list = new ArrayList<Task>();
+		tasks.forEach((k, v) -> {
+			if(v.isImportant())
 				list.add(v);
         });
 		return list;

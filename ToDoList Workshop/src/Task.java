@@ -1,10 +1,8 @@
-//Yi Xin here
-
 
 public class Task {
 	private String description = null;
 	private boolean isComplete = false;
-	
+	private boolean isImportant = false;
 	
 	public Task(String description) {
 		super();
@@ -15,6 +13,13 @@ public class Task {
 		super();
 		this.description = description;
 		this.isComplete = isComplete;
+	}
+
+	public Task(String description, boolean isComplete, boolean isImportant) {
+		super();
+		this.description = description;
+		this.isComplete = isComplete;
+		this.isImportant = isImportant;
 	}
 	
 	public String getDescription() {
@@ -28,6 +33,12 @@ public class Task {
 	}
 	public void setComplete(boolean isComplete) {
 		this.isComplete = isComplete;
+	}
+	public boolean isImportant() {
+		return isImportant;
+	}
+	public void setImportant(boolean isImportant){
+		this.isImportant = isImportant;
 	}
 
 }
