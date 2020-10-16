@@ -88,6 +88,16 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
 		return temp;
 	}
 	
+	public Collection<Task> getSortByPriority() {
+		
+		List<Task> temp = tasks.values().stream()
+				.collect(Collectors.toList());
+		Collections.sort(temp, (task1, task2) -> {
+			return task1.getPriority() -task2.getPriority();
+		});
+		return temp;
+	}
+	
 	public Map<Integer, List<Task>> getGroupByColor() {
 		List<Task> tempTasks = tasks.values().stream()
 				.collect(Collectors.toList());
@@ -126,4 +136,5 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
 		list.addAll(unimportantList);
 		return list;
 	}
+	
 }

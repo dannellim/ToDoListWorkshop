@@ -94,6 +94,26 @@ public class ToDoListTest extends TestCase{
 		//fail("Not implemented yet");
 	}
 	@Test
+	public void testSortByPriority() {
+		
+		TO_DO_LIST = new ToDoList();
+		Task task1 = new Task("1");
+		task1.setPriority(1);
+		Task task2 = new Task("2");
+		task2.setPriority(2);
+		Task task3 = new Task("3");
+		task3.setPriority(3);
+		
+		TO_DO_LIST.addTask(task1);
+		TO_DO_LIST.addTask(task2);
+		TO_DO_LIST.addTask(task3);
+		List<Task> sortByPrioritys = (List<Task>) TO_DO_LIST.getSortByPriority();
+		assertEquals(task1.getDescription(),sortByPrioritys.get(0).getDescription());
+		assertEquals(task2.getDescription(),sortByPrioritys.get(1).getDescription());
+		assertEquals(task3.getDescription(),sortByPrioritys.get(2).getDescription());
+	}
+	
+	@Test
 	public void testSortByColor() {
 		
 		TO_DO_LIST = new ToDoList();

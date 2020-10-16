@@ -13,6 +13,8 @@ public class Task implements Comparator<Task>, Comparable<Task> {
 	private boolean isImportant = false;
 	private int colorCode = NONE;
 	private Date createdDateTime =  null;
+	private int priority;
+	
 
 	public Task(String description) {
 		super();
@@ -34,6 +36,17 @@ public class Task implements Comparator<Task>, Comparable<Task> {
 		this.isImportant = isImportant;
 		this.createdDateTime = new Date();
 	}
+	
+	public Task(String description, boolean isComplete, boolean isImportant, Integer priority) {
+		super();
+		this.description = description;
+		this.isComplete = isComplete;
+		this.isImportant = isImportant;
+		this.createdDateTime = new Date();
+		this.priority = priority;
+		
+	}
+
 
 	public int getColorCode() {
 		return colorCode;
@@ -65,6 +78,14 @@ public class Task implements Comparator<Task>, Comparable<Task> {
 
 	public void setImportant(boolean isImportant) {
 		this.isImportant = isImportant;
+	}
+
+	public int getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 
 	@Override
