@@ -59,6 +59,16 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
         });
 		return list;
 	}
+	
+	public Collection<Task> getUncompletedTasks() {
+		// Add code here
+		Collection<Task> list = new ArrayList<Task>();
+		tasks.forEach((k, v) -> {
+			if(!v.isComplete())
+				list.add(v);
+        });
+		return list;
+	}
 
 	public Collection<Task> getImportantTasks() {
 		Collection<Task> list = new ArrayList<Task>();
@@ -85,5 +95,35 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
 					tempTasks.stream().collect(Collectors.groupingBy(Task::getColorCode));
 
 		 return groupByColorTasks;
+	}
+	public Collection<Task> getUnimportantTasks() {
+		Collection<Task> list = new ArrayList<Task>();
+		tasks.forEach((k, v) -> {
+			if(!v.isImportant())
+				list.add(v);
+        });
+		return list;
+	}
+	
+	public Collection<Task> sortByCompletion() {
+		List<Task> completelist = new ArrayList<>(getCompletedTasks());
+		Collections.sort(completelist);
+		List<Task> incompletelist = new ArrayList<>(getUncompletedTasks());
+		Collections.sort(incompletelist);
+		Collection<Task> list = new ArrayList<Task>();
+		list.addAll(completelist);
+		list.addAll(incompletelist);
+		return list;
+	}
+
+	public Collection<Task> sortByImportance() {
+		List<Task> importantList = new ArrayList<>(getImportantTasks());
+		Collections.sort(importantList);
+		List<Task> unimportantList = new ArrayList<>(getUnimportantTasks());
+		Collections.sort(unimportantList);
+		Collection<Task> list = new ArrayList<Task>();
+		list.addAll(importantList);
+		list.addAll(unimportantList);
+		return list;
 	}
 }
