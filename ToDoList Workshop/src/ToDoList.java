@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,6 +56,16 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
         });
 		return list;
 	}
+	
+	public Collection<Task> getUncompletedTasks() {
+		// Add code here
+		Collection<Task> list = new ArrayList<Task>();
+		tasks.forEach((k, v) -> {
+			if(!v.isComplete())
+				list.add(v);
+        });
+		return list;
+	}
 
 	public Collection<Task> getImportantTasks() {
 		Collection<Task> list = new ArrayList<Task>();
@@ -62,6 +73,17 @@ private HashMap<String, Task> tasks = new HashMap<String, Task>();
 			if(v.isImportant())
 				list.add(v);
         });
+		return list;
+	}
+	
+	public Collection<Task> sortByCompletion() {
+		List<Task> completelist = new ArrayList<>(getCompletedTasks());
+		Collections.sort(completelist);
+		List<Task> incompletelist = new ArrayList<>(getUncompletedTasks());
+		Collections.sort(incompletelist);
+		Collection<Task> list = new ArrayList<Task>();
+		list.addAll(completelist);
+		list.addAll(incompletelist);
 		return list;
 	}
 }
