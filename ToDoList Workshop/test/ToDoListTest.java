@@ -240,21 +240,13 @@ public class ToDoListTest extends TestCase{
 		TO_DO_LIST.addTask(completedTask3);
 		TO_DO_LIST.addTask(incompletedTask4);
 		TO_DO_LIST.addTask(incompletedTask5);
-		// Collection<Task> td =  TO_DO_LIST.getAllTasks();
-		// Iterator<Task> it = td.iterator();
-		// while(it.hasNext()) {
-		// 	System.out.println(it.next().toString());
-		// }
 		Collection<Task> tdl =  TO_DO_LIST.sortByCompletion();
-		// Iterator<Task> it2 = tdl.iterator();
-		// while(it2.hasNext()) {
-		// 	System.out.println(((Task)it.next()).toString());
-		// }
-		List<Task> completedList = (List<Task>) tdl;
-		System.out.println(completedList);
-		assertEquals(completedTask1.getDescription(), completedList.get(0).getDescription());
-		assertEquals(completedTask3.getDescription(), completedList.get(1).getDescription());
-		// System.out.println(completedList);
+		List<Task> sortedList = (List<Task>) tdl;
+		assertEquals(incompletedTask2.getDescription(), sortedList.get(0).getDescription());
+		assertEquals(incompletedTask4.getDescription(), sortedList.get(1).getDescription());
+		assertEquals(incompletedTask5.getDescription(), sortedList.get(2).getDescription());
+		assertEquals(completedTask1.getDescription(), sortedList.get(3).getDescription());
+		assertEquals(completedTask3.getDescription(), sortedList.get(4).getDescription());
 	}
 	@Test
 	public void testSortByImportance() {
