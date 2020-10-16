@@ -131,7 +131,6 @@ public class ToDoListTest extends TestCase{
 		assertEquals(redTask.getDescription(),sortByColorTasks.get(0).getDescription());
 		assertEquals(greenTask.getDescription(),sortByColorTasks.get(1).getDescription());
 		assertEquals(blueTask.getDescription(),sortByColorTasks.get(2).getDescription());
-
 		//fail("Not implemented yet");
 	}
 	
@@ -213,20 +212,21 @@ public class ToDoListTest extends TestCase{
 		TO_DO_LIST.addTask(incompletedImportantTask2);
 		TO_DO_LIST.addTask(completedUnimportantTask3);
 		TO_DO_LIST.addTask(incompletedUnimportantTask4);
-		Collection<Task> completedTasks = TO_DO_LIST.getImportantTasks();
-		int count1 = completedTasks.size();
+		Collection<Task> importantTasks = TO_DO_LIST.getImportantTasks();
+		int count1 = importantTasks.size();
 		assertEquals(count1, 2);
-		assertTrue(completedTasks.contains(completedImportantTask1));
-		assertTrue(completedTasks.contains(incompletedImportantTask2));
+		assertTrue(importantTasks.contains(completedImportantTask1));
+		assertTrue(importantTasks.contains(incompletedImportantTask2));
 		Task Task3 = TO_DO_LIST.getTask("Task3");
 		Task3.setImportant(true);
-		Collection<Task> completedTasks2 = TO_DO_LIST.getImportantTasks();
-		int count2 = completedTasks2.size();
+		Collection<Task> importantTasks2 = TO_DO_LIST.getImportantTasks();
+		int count2 = importantTasks2.size();
 		assertEquals(count2, 3);
-		assertTrue(completedTasks2.contains(completedImportantTask1));
-		assertTrue(completedTasks2.contains(incompletedImportantTask2));
-		assertTrue(completedTasks2.contains(Task3));
+		assertTrue(importantTasks2.contains(completedImportantTask1));
+		assertTrue(importantTasks2.contains(incompletedImportantTask2));
+		assertTrue(importantTasks2.contains(Task3));
 	}
+
 	@Test
 	public void testSortByCompletion() {
 		TO_DO_LIST = new ToDoList();
@@ -240,16 +240,38 @@ public class ToDoListTest extends TestCase{
 		TO_DO_LIST.addTask(completedTask3);
 		TO_DO_LIST.addTask(incompletedTask4);
 		TO_DO_LIST.addTask(incompletedTask5);
-		Collection<Task> td =  TO_DO_LIST.getAllTasks();
-		Iterator<Task> it = td.iterator();
-		while(it.hasNext()) {
-			System.out.println(it.next().toString());
-		}
+		// Collection<Task> td =  TO_DO_LIST.getAllTasks();
+		// Iterator<Task> it = td.iterator();
+		// while(it.hasNext()) {
+		// 	System.out.println(it.next().toString());
+		// }
 		Collection<Task> tdl =  TO_DO_LIST.sortByCompletion();
-		Iterator<Task> it2 = tdl.iterator();
-		while(it2.hasNext()) {
-			System.out.println(((Task)it.next()).toString());
-		}
+		// Iterator<Task> it2 = tdl.iterator();
+		// while(it2.hasNext()) {
+		// 	System.out.println(((Task)it.next()).toString());
+		// }
+		List<Task> completedList = (List<Task>) tdl;
+		System.out.println(completedList);
+		assertEquals(completedTask1.getDescription(), completedList.get(0).getDescription());
+		assertEquals(completedTask3.getDescription(), completedList.get(1).getDescription());
+		// System.out.println(completedList);
 	}
-	
+	@Test
+	public void testSortByImportance() {
+		TO_DO_LIST = new ToDoList();
+		Task completedUnimportantTask1 = new Task("Task1", true, false);
+		Task incompletedImportantTask2 = new Task("Task2", false, true);
+		Task completedImportantTask3 = new Task("Task3", true, true);
+		Task incompletedUnimportantTask4 = new Task("Task4", false, false);
+		TO_DO_LIST.addTask(completedUnimportantTask1);
+		TO_DO_LIST.addTask(incompletedImportantTask2);
+		TO_DO_LIST.addTask(completedImportantTask3);
+		TO_DO_LIST.addTask(incompletedUnimportantTask4);
+		Collection<Task> unsortedImportantCollection = TO_DO_LIST.getAllTasks();
+		Collection<Task> sortedImportantCollection = TO_DO_LIST.sortByImportance();
+		assertTrue(!unsortedImportantCollection.equals(sortedImportantCollection));
+		List<Task> sortedImportantList = (List<Task>)sortedImportantCollection;
+		assertEquals(incompletedImportantTask2.getDescription(), sortedImportantList.get(0).getDescription());
+		assertEquals(completedImportantTask3.getDescription(), sortedImportantList.get(1).getDescription());
+	}
 }
